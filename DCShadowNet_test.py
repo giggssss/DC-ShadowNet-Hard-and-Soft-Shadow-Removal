@@ -21,6 +21,7 @@ class DCShadowNet(object) :
         self.batch_size = args.batch_size
         self.print_freq = args.print_freq
         self.save_freq = args.save_freq
+        self.device = args.device
 
         self.lr = args.lr
         self.weight_decay = args.weight_decay
@@ -94,7 +95,7 @@ class DCShadowNet(object) :
         self.disLB = Discriminator(input_nc=3, ndf=self.ch, n_layers=5).to(self.device)
 
     def load(self, dir, step):
-        params = torch.load(os.path.join(dir, self.dataset + '_params_%07d.pt' % step))
+        params = torch.load(os.path.join(dir, self.dataset + '_params_%07d.pt' % step), map_location=self.device)
         self.genA2B.load_state_dict(params['genA2B'])
         self.genB2A.load_state_dict(params['genB2A'])
         self.disGA.load_state_dict(params['disGA'])

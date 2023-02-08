@@ -9,7 +9,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('--phase', type=str, default='test', help='[train / test]')
     parser.add_argument('--dataset', type=str, default='SRD', help='dataset_name')
-    parser.add_argument('--datasetpath', type=str, default='/disk1/yeying/dataset/SRD', help='dataset_path')
+    parser.add_argument('--datasetpath', type=str, default='SRD_REMOVAL_RESULTS', help='dataset_path')
     parser.add_argument('--iteration', type=int, default=1000000, help='The number of training iterations')
     parser.add_argument('--batch_size', type=int, default=1, help='The size of batch size')
     parser.add_argument('--print_freq', type=int, default=1000, help='The number of image print freq')
@@ -40,7 +40,7 @@ def parse_args():
     parser.add_argument('--img_ch', type=int, default=3, help='The size of image channel')
 
     parser.add_argument('--result_dir', type=str, default='results', help='Directory name to save the results')
-    parser.add_argument('--device', type=str, default='cuda', choices=['cpu', 'cuda'], help='Set gpu mode; [cpu, cuda]')
+    parser.add_argument('--device', type=str, default='cpu', choices=['cpu', 'cuda'], help='Set gpu mode; [cpu, cuda]')
     parser.add_argument('--benchmark_flag', type=str2bool, default=False)
     parser.add_argument('--resume', type=str2bool, default=True)
     
@@ -80,7 +80,7 @@ def main():
     # build graph
     gan.build_model()
 
-    if args.phase == 'test' :
+    if args.phase == 'test':
         gan.test()
         print(" [*] Test finished!")
 
